@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Image Blog - Infinite Scroll with Background Notifications
 
-## Getting Started
+A modern, responsive image blog application built with Next.js, featuring infinite scroll, background notifications, and dark mode support.
 
-First, run the development server:
+## 🚀 Features
+
+- **Image Upload**: Upload multiple images with drag-and-drop support
+- **Masonry Layout**: Pinterest-style responsive grid layout
+- **Infinite Scroll**: Automatically loads more posts using TanStack Query
+- **Background Notifications**: Simulated server notifications every 15-30 seconds
+- **Dark Mode**: System-aware theme toggle
+- **Image Compression**: Automatic client-side compression before storage
+- **localStorage Persistence**: Uploaded images persist across sessions
+- **Notification History**: Bell icon with dropdown showing last 50 notifications
+
+## 🛠️ Tech Stack
+
+- **Next.js 16** with App Router
+- **Redux Toolkit** for state management
+- **TanStack Query** for infinite scroll & data fetching
+- **shadcn/ui** for UI components
+- **Tailwind CSS** for styling
+- **Sonner** for toast notifications
+- **next-themes** for dark mode
+
+## 🚦 Getting Started
+
+### Installation
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 📖 Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Upload Images**: Click "Upload Images" button, drag-drop or select files
+2. **Infinite Scroll**: Scroll down to automatically load more posts
+3. **Dark Mode**: Click sun/moon icon in header
+4. **Notifications**: Click bell icon to view notification history
 
-## Learn More
+## 🎯 Key Implementation
 
-To learn more about Next.js, take a look at the following resources:
+### Infinite Scroll
+Uses TanStack Query's `useInfiniteQuery` with Intersection Observer. Automatically fetches next page when user scrolls near bottom.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Background Notifications
+Simulated using `setTimeout` with random 15-30 second intervals. Dispatches to Redux and shows toast notifications with proper cleanup.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Image Storage
+Compresses images to 800px width at 80% quality, converts to base64, stores in localStorage. Auto-deletes oldest posts when approaching 5-10MB limit.
 
-## Deploy on Vercel
+### State Management
+Redux Toolkit with 3 slices: images, notifications, upload. TanStack Query handles server state with caching and optimistic updates.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📁 Project Structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+├── apis/              # Mock API layer
+├── components/        # Atomic design (atoms/molecules/organisms)
+├── hooks/             # Custom hooks (TanStack Query, Intersection Observer)
+├── store/             # Redux slices
+├── utils/             # Helper functions
+└── pages/             # Route pages
+```
+
+## 🚀 Future Improvements
+
+- Real backend API with database
+- WebSocket for real-time notifications
+- Virtual scrolling for 1000+ images
+- Image editing (crop, filters)
+- Search and tagging functionality
+- PWA with offline support
+
+---
+
+**Built for TradeGospel Frontend Developer Assignment**
