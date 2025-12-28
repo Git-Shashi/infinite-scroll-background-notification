@@ -1,11 +1,10 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import { Toaster } from 'sonner';
 import { store } from './store/store';
-import Router from './Router';
+import Home from './pages/Home/Home';
 import './app/globals.css';
 
 const queryClient = new QueryClient({
@@ -22,12 +21,10 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
-        <BrowserRouter>
-          <ThemeProvider>
-            <Router />
-            <Toaster position="top-right" richColors closeButton />
-          </ThemeProvider>
-        </BrowserRouter>
+        <ThemeProvider>
+          <Home />
+          <Toaster position="top-right" richColors closeButton />
+        </ThemeProvider>
       </Provider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
